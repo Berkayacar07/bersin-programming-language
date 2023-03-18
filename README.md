@@ -1,5 +1,5 @@
-# Programming Language Mrt
-Group Members: ..., ...
+# Programming Language Bersin
+Group Members: Berkay Acar , Ersin Aydoğmuş
 
 
 ## Syntax
