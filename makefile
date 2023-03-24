@@ -1,6 +1,6 @@
-myprog: myprog.l
-	lex myprog.l
-	gcc -o myprog lex.yy.c -ll
+bersin: bersin.l
+	lex bersin.l
+	gcc -o bersin lex.yy.c -ll
 
 clean:
-	rm myprog lex.yy.c
+	rm bersin lex.yy.c
