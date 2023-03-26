@@ -52,58 +52,34 @@ make bersin
 
 
 # Syntax
+<program> ::= <statement_list>
 
-<program>        ::= <statement_list>
+<statement_list> ::= <statement> ";" | <statement> ";" <statement_list>
 
-<statement_list> ::= <statement>
-                   | <statement> ";" <statement_list>
+<statement> ::= <assignment_statement> | <expression> | <conditional_statement> | <loop_statement>
 
-<statement>      ::= <loop_statement>
-                   | <conditional_statement>
-                   | <command_statement>
+<assignment_statement> ::= <identifier> "=" <expression>
 
-<loop_statement> ::= "woop" <expression> "{" <statement_list> "}"
+<expression> ::= <term> | <expression> "+" <term> | <expression> "-" <term>
 
-<conditional_statement> ::= "?" <expression> <statement_list> <else_statement>
-<else_statement> ::= ":" <statement_list>
+<term> ::= <factor> | <term> "*" <factor> | <term> "/" <factor>
 
-<command_statement> ::= <identifier> <command>
+<factor> ::= <integer> | <double> | <boolean> | <string> | <identifier> | "(" <expression> ")" | <unary_operator> <factor>
 
-<command>        ::= <assignment>
-                   | <increment>
-                   | <decrement>
+<boolean> ::= "true" | "false"
 
-<assignment>     ::= "=" <expression>
+<unary_operator> ::= "-" | "++" | "--"
 
-<increment>      ::= "++"
+<identifier> ::= [a-zA-Z]+
 
-<decrement>      ::= "--"
+<integer> ::= 0|[-+]?([0-9][0-9]*)
 
-<expression>     ::= <comparison>
-                   | <comparison> "||" <comparison>
+<double> ::= [-+]?([0-9]*\.[0-9]+|[0-9]+)
 
-<comparison>     ::= <term>
-                   | <term> ">" <term>
-                   | <term> ">=" <term>
-                   | <term> "<" <term>
-                   | <term> "<=" <term>
-                   | <term> "==" <term>
-                   | <term> "!=" <term>
+<string> ::= "$" (.*?) "$"
 
-<term>           ::= <factor>
-                   | <factor> "*" <factor>
-                   | <factor> "/" <factor>
+<conditional_statement> ::= "?" <expression> <statement> ":" <statement>
 
-<factor>         ::= <number>
-                   | <identifier>
-                   | "(" <expression> ")"
+<loop_statement> ::= "woop" "(" <assignment_statement> ";" <expression> ";" <assignment_statement> ")" <statement>
 
-<number>         ::= <integer> | <double>
-
-<integer>        ::= <digit>+
-<double>         ::= <digit>* "." <digit>+
-
-<identifier>     ::= <letter> (<letter> | <digit>)*
-
-<digit>          ::= [0-9]
-<letter>         ::= [a-zA-Z]
+<comment> ::= "@@" (.*?) "@@"
