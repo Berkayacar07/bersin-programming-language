@@ -22,7 +22,20 @@ The foop loop works with the same logic as the woop. Only the syntax is differen
 :{    
 @@SecondBody   
 }     
-if the condition a>5 is true then the FirstBody works. Otherwise the SecondBody works.      
+if the condition a>5 is true then the FirstBody works. Otherwise the SecondBody works.    
+- ">=" --> Greater or equal   
+- "<=" --> Smaller or equal   
+- "<" --> Smaller   
+- ">" --> Greater   
+- / --> Divider   
+- * --> Multiplier  
+- == --> Equals   
+- != --> Not equals   
+- = --> Assign  
+- "--" --> Minus minus  
+- ++ --> Plus plus  
+- "-" --> Minus 
+- + --> Plus
 - There are conditional operators.    
 "||" --> OR     
 "&&" --> AND    
@@ -33,4 +46,63 @@ $ BERSIN $  --> STRING
 
 - You can run your program by running the makefile and giving it to myprog as input:
 
-make ./myprog < example.brn
+make bersin   
+ ./bersin < example.brn     
+
+
+
+Syntax
+<program>        ::= <statement_list>
+
+<statement_list> ::= <statement>
+                   | <statement> ";" <statement_list>
+
+<statement>      ::= <loop_statement>
+                   | <conditional_statement>
+                   | <command_statement>
+
+<loop_statement> ::= "woop" <expression> "{" <statement_list> "}"
+
+<conditional_statement> ::= "?" <expression> <statement_list> <else_statement>
+<else_statement> ::= ":" <statement_list> | ε
+
+<command_statement> ::= <identifier> <command>
+
+<command>        ::= <assignment>
+                   | <increment>
+                   | <decrement>
+
+<assignment>     ::= "=" <expression>
+
+<increment>      ::= "++"
+
+<decrement>      ::= "--"
+
+<expression>     ::= <comparison>
+                   | <comparison> "||" <comparison>
+
+<comparison>     ::= <term>
+                   | <term> ">" <term>
+                   | <term> ">=" <term>
+                   | <term> "<" <term>
+                   | <term> "<=" <term>
+                   | <term> "==" <term>
+                   | <term> "!=" <term>
+
+<term>           ::= <factor>
+                   | <factor> "*" <factor>
+                   | <factor> "/" <factor>
+
+<factor>         ::= <number>
+                   | <identifier>
+                   | "(" <expression> ")"
+
+<number>         ::= <integer> | <double>
+
+<integer>        ::= <digit>+
+<double>         ::= <digit>* "." <digit>+
+
+<identifier>     ::= <letter> (<letter> | <digit>)*
+
+<digit>          ::= [0-9]
+<letter>         ::= [a-zA-Z]
