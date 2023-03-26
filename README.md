@@ -27,15 +27,15 @@ if the condition a>5 is true then the FirstBody works. Otherwise the SecondBody 
 - "<=" --> Smaller or equal   
 - "<" --> Smaller   
 - ">" --> Greater   
-- / --> Divider   
-- * --> Multiplier  
-- == --> Equals   
+- "/" --> Divider   
+- "*" --> Multiplier  
+- "==" --> Equals   
 - != --> Not equals   
-- = --> Assign  
+- "=" --> Assign  
 - "--" --> Minus minus  
 - ++ --> Plus plus  
 - "-" --> Minus 
-- + --> Plus
+- "+" --> Plus
 - There are conditional operators.    
 "||" --> OR     
 "&&" --> AND    
@@ -44,14 +44,14 @@ if the condition a>5 is true then the FirstBody works. Otherwise the SecondBody 
 0.1, 0.2, 0.3,... --> DOUBLE    
 $ BERSIN $  --> STRING    
 
-- You can run your program by running the makefile and giving it to myprog as input:
+- You can run your program by running the makefile and giving it to bersin as input:
 
 make bersin   
  ./bersin < example.brn     
 
 
 
-#Syntax
+# Syntax
 
 <program>        ::= <statement_list>
 
@@ -65,7 +65,7 @@ make bersin
 <loop_statement> ::= "woop" <expression> "{" <statement_list> "}"
 
 <conditional_statement> ::= "?" <expression> <statement_list> <else_statement>
-<else_statement> ::= ":" <statement_list> | ε
+<else_statement> ::= ":" <statement_list>
 
 <command_statement> ::= <identifier> <command>
 
