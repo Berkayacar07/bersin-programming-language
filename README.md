@@ -52,34 +52,61 @@ make bersin
 
 
 # Syntax
-<program> ::= <statement_list>
 
-<statement_list> ::= <statement> ";" | <statement> ";" <statement_list>
+```
+<program> ::= <statement_list>         
 
-<statement> ::= <assignment_statement> | <expression> | <conditional_statement> | <loop_statement>
+<statement_list> ::= <statement>          
+                   | <statement> ";" <statement_list>         
 
-<assignment_statement> ::= <identifier> "=" <expression>
+<statement>      ::= <loop_statement>
+                   | <conditional_statement>
+                   | <command_statement>
 
-<expression> ::= <term> | <expression> "+" <term> | <expression> "-" <term>
+<woop_statement> ::= "woop" <expression> "{" <statement_list> "}"
+<foop_statement> ::= "foop" <expression> "{" <statement_list> "}"
 
-<term> ::= <factor> | <term> "*" <factor> | <term> "/" <factor>
+<conditional_statement> ::= "?" <expression> <statement_list> <else_statement>
+<else_statement> ::= ":" <statement_list> | ε
 
-<factor> ::= <integer> | <double> | <boolean> | <string> | <identifier> | "(" <expression> ")" | <unary_operator> <factor>
+<command_statement> ::= <identifier> <command>
 
-<boolean> ::= "true" | "false"
+<command>        ::= letter
+          |   command letter
 
-<unary_operator> ::= "-" | "++" | "--"
+<assignment>     ::= "=" <expression>
 
-<identifier> ::= [a-zA-Z]+
+<increment>      ::= "++"
 
-<integer> ::= 0|[-+]?([0-9][0-9]*)
+<decrement>      ::= "--"
 
-<double> ::= [-+]?([0-9]*\.[0-9]+|[0-9]+)
+<expression>     ::= <comparison>
+                   | <comparison> "||" <comparison>
 
-<string> ::= "$" (.*?) "$"
+<comparison>     ::= <term>
+                   | <term> ">" <term>
+                   | <term> ">=" <term>
+                   | <term> "<" <term>
+                   | <term> "<=" <term>
+                   | <term> "==" <term>
+                   | <term> "!=" <term>
 
-<conditional_statement> ::= "?" <expression> <statement> ":" <statement>
+<term>           ::= <factor>
+                   | <factor> "*" <factor>
+                   | <factor> "/" <factor>
 
-<loop_statement> ::= "woop" "(" <assignment_statement> ";" <expression> ";" <assignment_statement> ")" <statement>
+<factor>         ::= <number>
+                   | <identifier>
+                   | "(" <expression> ")"
 
-<comment> ::= "@@" (.*?) "@@"
+<number>         ::= <integer> | <double>
+
+<integer>        ::= <digit>+
+<double>         ::= <digit>* "." <digit>+
+
+<identifier>     ::= <letter> (<letter> | <digit>)*
+<double>         ::= <digit>* "." <digit>+
+<digit>          ::= [0-9]
+<letter>         ::= [a-zA-Z]
+
+```
