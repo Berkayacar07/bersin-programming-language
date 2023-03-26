@@ -1,5 +1,5 @@
 # Programming Language Bersin
-Group Members: Berkay Acar , Ersin Aydoğmuş
+Group Members: Berkay Acar (20190808036) , Ersin Aydoğmuş (20190808028)
 
 ## Explanations about the language
 
