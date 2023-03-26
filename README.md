@@ -51,7 +51,8 @@ make bersin
 
 
 
-Syntax
+#Syntax
+
 <program>        ::= <statement_list>
 
 <statement_list> ::= <statement>
