@@ -1,34 +1,59 @@
+%{
+#include <stdlib.h>
+#include "bersin.h"
+#include "y.tab.h"
+void yyerror(char *);
+%}
+
 %%
-"("             printf("OPEN PARENTHESIS\n");
-")"             printf("CLOSE PARENTHESIS\n");
-"{"             printf("OPEN CURLY BRACKET\n");
-"}"             printf("CLOSE CURLY BRACKET\n");
-true|false		printf("BOOLEAN\n");
-woop 	        printf("WOOP\n");
-foop	        printf("FOOP\n");
-"||"            printf("OR\n");
-&&              printf("AND\n");
-">="            printf("GREATER OR EQUAL\n");
-"<="            printf("SMALLER OR EQUAL\n");
-"<"             printf("SMALLER\n");
-">"             printf("GREATER\n"); 
-"/"             printf("DIVIDER\n");
-"*"             printf("MULTIPLIER\n");       
-"?"             printf("?\n");
-":" 	        printf(":\n");
-[a-zA-Z]+       printf("IDENTIFIER\n");
-==              printf("EQUALS\n");
-!=              printf("NOT EQUALS\n");
-=               printf("ASSIGN\n");
-;			    printf("SEMICOLON\n");
-0|[-+]?([0-9][0-9]*)   printf("INTEGER\n");
-[-+]?([0-9]*\.[0-9]+|[0-9]+) printf("double\n");
-[$](.*?)[$]     printf("STRING\n");
---              printf("MINUS MINUS\n");
-"++"            printf("PLUS PLUS\n");
-"+"             printf("PLUS\n");
-"-"             printf("MINUS\n");
-\ |\t|\n        ;
-@@              printf("COMMENT\n");
-.			    printf("Syntax Error!\n");
+"@@"		    {return COMMENTLINE;}
+"WHITESPACE"	;
+"TRUE"          {return TRUE;}
+"FALSE"         {return FALSE;}
+"BOOL"   	{return BOOLEAN;}
+"FUNC"	{return FUNCTION;}
+"STOPFUNC"		{return END_FUNCTION;}
+"RET"	{return RETURN;}
+"?"		{return IF;}
+":"		{return ELSE;}
+"WOOP"		{return WHILE;}
+"ENDWOOP"		{return END_WHILE;}
+"FOOP"		{return FOR;}
+"ENDFOOP"		{return END_FOR;}
+"LOG"	{return CONSOLPRINT;}
+"+"             {return PLUS;}
+"-"             {return MINUS;}
+"*"             {return MULTIPLE;}
+"/"             {return DIVIDE;}
+"<"             {return LESSTHAN;}
+">"             {return GREATERTHAN;}
+"++"		{return INCREASE;}
+"--"		{return DECREASE;}
+":"		{return COLON;}
+";"		{return SEMICOLON;}
+","		{return COMMA;}
+">="		{return EQUALORGREAT;}
+"<="	        {return EQUALORLESS;}
+"=="		{return EQUAL;}
+"!="		{return ISNOTEQUAL;}
+"AND"		{return AND;}
+"OR"		{return OR;}
+"("		{return OPENBR;}
+")"		{return CLOSEBR;}
+"{"		{return OPENCBR;}
+"}"		{return CLOSECBR;}
+\[		{return OPENSBR;}
+\]		{return CLOSESBR;}
+\"		{return QUOTES;}
+    
+0                           {yylval.integer = atoi(yytext); return INT; }
+[1-9][0-9]*                 {yylval.integer = atoi(yytext); return INT; }
+[a-zA-Z_]                   { yylval.ide = *yytext - 'a'; return IDENTIFIER; }
+[-()<>=+*/;{}.]             {return *yytext; }
+[+-]?[0-9]+[\.][0-9]*	    {return DINT;}
+^\d*\.?\d*$	            {return FLOAT;}
+[ \t\n]		             ;
+.		            yyerror("Unknown character");
 %%
+
+int yywrap (void) {return 1;}
