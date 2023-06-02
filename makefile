@@ -1,6 +1,9 @@
-bersin: bersin.l
+make: 
 	lex bersin.l
-	gcc -o bersin lex.yy.c -ll
+	yacc -d bersin.y
+	gcc lex.yy.c y.tab.c -ll
+run:
+	./a.out < example.brn
 
-clean:
-	rm bersin lex.yy.c
+clear:
+	rm lex.yy.c y.tab.c a.out y.tab.h 
